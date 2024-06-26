@@ -1,15 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DiamondSquareTerrainGenerator : MonoBehaviour
 {
     public int mapSize = 2049; // Size of the heightmap grid (must be 2^n + 1, e.g., 65, 129, 257, ...)
-    public int lowResMapSize = 683; // Size of the low res map (2049/3)
+    public static int lowResMapSize = 16; // Size of the low res map ((2049-1)/64)
+    public int lowResScale = 2048/lowResMapSize ;
     public float roughness = 0.7f; // Roughness factor for terrain generation
     public float heightScale = 10f; // Scale factor for terrain height
-    public int terrainCount = 5; // Number of terrains to generate
+    public int terrainCount = 1; // Number of terrains to generate
     public int gridWidth = 3; // Number of terrains per row
     public float spacing = -1.0f; // Spacing between terrains (use negative or zero for minimal spacing)
     public Vector3 terrainScale = new Vector3(1.0f, 1.0f, 1.0f); // Scale for each terrain tile
+    public Vector3 mapPositionOffset = new Vector3(500f, 500f, 0f);
+    public RawImage rawImage; // Reference to the RawImage component to display the map
     public float[,] heightMap;
     public float [,] lowResMap;
 
@@ -86,25 +90,19 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
             for (int y = 0; y < lowResMapSize; y++) {
                 float avg = 0.0f;
 
-                // Multiply both coords by 3
-                int tempXCoord = 3 * x;
-                int tempYCoord = 3 * y;
+                // Multiply both coords by lowResMapSize
+                int tempXCoord = lowResScale * x;
+                int tempYCoord = lowResScale * y;
                
-                // Add up the 9 values
-                avg += heightMap[tempXCoord,tempYCoord];
-                avg += heightMap[tempXCoord,tempYCoord+1];
-                avg += heightMap[tempXCoord,tempYCoord+2];
-
-                avg += heightMap[tempXCoord+1,tempYCoord];
-                avg += heightMap[tempXCoord+1,tempYCoord+1];
-                avg += heightMap[tempXCoord+1,tempYCoord+2];
-
-                avg += heightMap[tempXCoord+2,tempYCoord];
-                avg += heightMap[tempXCoord+2,tempYCoord+1];
-                avg += heightMap[tempXCoord+2,tempYCoord+2];
+                // Add up the values
+                for (int a = 0; a < lowResScale; a++) {
+                    for (int b = 0; b < lowResScale; b++) {
+                        avg += heightMap[tempXCoord + a, tempYCoord + b];
+                    }
+                }
                
-                // Divide by 9
-                avg = avg / 9;
+                // Divide by lowResScale squared
+                avg = avg / (lowResScale*lowResScale);
 
                 // Assign value to lowResMap
                 lowResMap[x,y] = avg;
@@ -179,6 +177,13 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
         terrain.transform.position = new Vector3(xOffset, yOffset, 0);
 
         // Apply the scaling transform
-        terrain.transform.localScale = terrainScale;
+        terrain.transform.localScale = new Vector3(10f, 10f, 10f);
+
+        //Apply the position transform
+        terrain.transform.position = mapPositionOffset;
+
+        if (rawImage != null) {
+            rawImage.texture = texture;
+        }
     }
 }
