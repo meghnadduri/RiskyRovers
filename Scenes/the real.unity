@@ -2192,6 +2192,11 @@ MonoBehaviour:
   terrainScale: {x: 1, y: 1, z: 1}
   mapPositionOffset: {x: 500, y: 500, z: 0}
   rawImage: {fileID: 1966212720}
+  rover: {fileID: 2081609967}
+  rawX: 0
+  rawY: 0
+  convertedX: 0
+  convertedY: 0
 --- !u!1 &958949960
 GameObject:
   m_ObjectHideFlags: 0
@@ -4757,7 +4762,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2104476470}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88e96bce9cba8af4f9c3d56aafd7ca98, type: 3}
   m_Name: 

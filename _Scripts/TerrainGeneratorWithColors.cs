@@ -14,15 +14,76 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
     public Vector3 terrainScale = new Vector3(1.0f, 1.0f, 1.0f); // Scale for each terrain tile
     public Vector3 mapPositionOffset = new Vector3(500f, 500f, 0f);
     public RawImage rawImage; // Reference to the RawImage component to display the map
+    public Transform rover; // Rover to track
+    public float rawX; // To reveal mini map
+    public float rawY; // To reveal mini map
+    public int convertedX; // To reveal mini map
+    public int convertedY; // To reveal mini map
+    public bool[,] boolArray = new bool[16, 16]; // Bool array for mini map
     public float[,] heightMap;
     public float [,] lowResMap;
 
     void Start()
     {
+        for (int i = 0; i < 16; i++) 
+        {
+            for (int j = 0; j < 16; j++)
+            {
+                boolArray[i, j] = false;
+            }
+        }
+
         for (int i = 0; i < terrainCount; i++)
         {
             GenerateTerrain(i);
         }
+    }
+
+    void Update() {
+
+        // Get the world coordinates of the rover
+        Vector3 roverWorldPosition = rover.transform.position;
+
+        // Get just the raw X and Y from the vector
+        rawX = (float) roverWorldPosition.x;
+        rawY = (float) roverWorldPosition.y;
+
+        // Convert it to 16 x 16
+        convertedX = (int) ((rawX + 10.0f) * 0.8f);
+        convertedY = (int) ((rawY + 10.0f) * 0.8f);
+
+        // Change the appropriate value in the bool array
+        if (convertedX < 16 && convertedY < 16) {
+            boolArray[convertedX, convertedY] = true;
+            
+            if (convertedX > 0) {
+                boolArray[convertedX - 1, convertedY] = true;
+            }
+            if (convertedY > 0) {
+                boolArray[convertedX, convertedY - 1] = true;
+            }
+            if (convertedX < 15) {
+                boolArray[convertedX + 1, convertedY] = true;
+            }
+            if (convertedY < 15) {
+                boolArray[convertedX, convertedY + 1] = true;
+            }
+            if (convertedX > 0 && convertedY > 0) {
+                boolArray[convertedX - 1, convertedY - 1] = true;
+            }
+            if (convertedX > 0 && convertedY < 15) {
+                boolArray[convertedX - 1, convertedY + 1] = true;
+            }
+            if (convertedX < 15 && convertedY < 15) {
+                boolArray[convertedX + 1, convertedY + 1] = true;
+            }
+            if (convertedX < 15 && convertedY > 0) {
+                boolArray[convertedX + 1, convertedY - 1] = true;
+            }
+        }
+        
+        // Display the lowResMap visually
+        DisplayLowResMap(lowResMap, 1, boolArray);
     }
 
     void GenerateTerrain(int index)
@@ -41,9 +102,6 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
 
         // Display the heightmap visually
         DisplayHeightMap(heightMap, index);
-
-        // Display the lowResMap visually
-        DisplayLowResMap(lowResMap, index);
     }
 
     void DiamondSquare(float[,] heightMap, int x1, int y1, int x2, int y2, float scale)
@@ -145,7 +203,7 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
         terrain.transform.localScale = terrainScale;
     }
 
-    void DisplayLowResMap(float[,] lowResMap, int index)
+    void DisplayLowResMap(float[,] lowResMap, int index, bool[,] boolArray)
     {
         Texture2D texture = new Texture2D(lowResMapSize, lowResMapSize, TextureFormat.RGBA32, false);
         texture.filterMode = FilterMode.Bilinear; // Smoothing the texture
@@ -161,16 +219,16 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
             }
         }
 
-        // TEEEEEEEEEEEESSSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-        //colors[3 * lowResMapSize + 0 ] = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        //colors[3 * lowResMapSize + 1 ] = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        //colors[3 * lowResMapSize + 2 ] = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        //colors[3 * lowResMapSize + 3 ] = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        //colors[3 * lowResMapSize + 4 ] = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        //colors[3 * lowResMapSize + 5 ] = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        //colors[3 * lowResMapSize + 6 ] = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        //colors[3 * lowResMapSize + 7 ] = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        // TEEEEEEEEEEEEESSSSSSSSSSSSTTTTTTTTTTTTTTTTTTT
+        
+
+        // Make the color change
+        for (int m = 0; m < 16; m++) {
+            for (int n = 0; n < 16; n++) {
+                if (boolArray[m,n] == true) {
+                    colors[n * lowResMapSize + m ] = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+                }
+            }
+        }
 
         texture.SetPixels(colors);
         texture.Apply();
@@ -196,5 +254,7 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
         if (rawImage != null) {
             rawImage.texture = texture;
         }
+
+        Destroy(terrain, 0.1f);
     }
 }
