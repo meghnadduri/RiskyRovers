@@ -1,39 +1,55 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; // Add this namespace
+using UnityEngine.SceneManagement;
 
 public class HealthManager : MonoBehaviour
 {
-    public int maxHealth = 10;
-    private int currentHealth;
-    public Slider healthBarSlider; // Reference to the Health Bar Slider
-    public Image fillImage;
+    public int maxHealth = 100; // Total max health for the combined health bar
+    private float currentHealth;
+    public Slider bigHealthBarSlider; // Reference to the big Health Bar Slider
+
+    public MovHealthManager movementHealthManager; // Reference to the script managing movement health
+    public RockHealthManager collisionHealthManager; // Reference to the script managing collision health
+
+    private float movementHealth;
+    private float collisionHealth;
 
     void Start()
     {
         currentHealth = maxHealth;
-        healthBarSlider.maxValue = maxHealth;
-        healthBarSlider.value = currentHealth;
+        bigHealthBarSlider.maxValue = maxHealth;
+        bigHealthBarSlider.value = currentHealth;
+
+        // Initialize individual health managers
+        movementHealthManager.onHealthChanged += UpdateMovementHealth;
+        collisionHealthManager.onHealthChanged += UpdateCollisionHealth;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void UpdateMovementHealth(float newMovementHealth)
     {
-        if (collision.gameObject.CompareTag("Rock"))
-        {
-            TakeDamage(1);
-        }
+        movementHealth = newMovementHealth;
+        UpdateCombinedHealth();
     }
 
-    void TakeDamage(int damage)
+    void UpdateCollisionHealth(float newCollisionHealth)
     {
-        currentHealth -= damage;
+        collisionHealth = newCollisionHealth;
+        UpdateCombinedHealth();
+    }
+
+    void UpdateCombinedHealth()
+    {
+        // Calculate the combined health
+        currentHealth = movementHealth + collisionHealth;
+
         if (currentHealth < 0)
         {
             currentHealth = 0;
         }
+
         UpdateHealthBar();
 
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
         {
             LoadGameOverScene(); // Load the game over scene
         }
@@ -41,12 +57,11 @@ public class HealthManager : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        healthBarSlider.value = currentHealth;
+        bigHealthBarSlider.value = currentHealth;
     }
 
     void LoadGameOverScene()
     {
-        SceneManager.LoadScene("Died");
+        SceneManager.LoadScene("Died"); // Replace "GameOverScene" with the name of your scene
     }
 }
-

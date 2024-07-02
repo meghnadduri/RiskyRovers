@@ -254,7 +254,6 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
         if (rawImage != null) {
             rawImage.texture = texture;
         }
-
-        Destroy(terrain, 0.1f);
+        Destroy(terrain,0.1f);
     }
 }
