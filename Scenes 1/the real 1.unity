@@ -204,7 +204,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 55
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 4159349c027cff543897854abc669def, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: b0f355847fef08b4183d0a5f536b4ecb, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -1085,7 +1085,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 4159349c027cff543897854abc669def, type: 2}
+  m_Texture: {fileID: 8400000, guid: b0f355847fef08b4183d0a5f536b4ecb, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1932,6 +1932,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2028,6 +2029,19 @@ MonoBehaviour:
   target: {fileID: 2081609967}
   smoothSpeed: 0.125
   offset: {x: 0, y: 0, z: -10}
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec08571a0607c834a96e288f6e884f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rover: {fileID: 2081609962}
 --- !u!1 &536985921
 GameObject:
   m_ObjectHideFlags: 0
@@ -4234,7 +4248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1157618117}
   - component: {fileID: 1157618118}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: MiniMapIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4297,12 +4311,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6c054b507866e27419714091aa5a80c9, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: 6b1d7393a91259241905196e7af9c846, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -6246,7 +6260,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3e26619e94f3eb8449f5f14057e9f2b9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ab95ab269aa2274894744e2215a4074, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7039,7 +7053,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: f75c9daf1f7df2e42a2d0daa6a2c9fcc, type: 2}
+  m_Texture: {fileID: 8400000, guid: 8e9c9252cca0e934887fb20cc4834f96, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -7534,9 +7548,9 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 200
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: f75c9daf1f7df2e42a2d0daa6a2c9fcc, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 8e9c9252cca0e934887fb20cc4834f96, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -7856,7 +7870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77906e3c89ac65a479555f23e1256f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 0.3
 --- !u!114 &2081609971
 MonoBehaviour:
   m_ObjectHideFlags: 0
