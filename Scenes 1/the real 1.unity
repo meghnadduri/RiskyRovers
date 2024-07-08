@@ -204,7 +204,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 55
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: b0f355847fef08b4183d0a5f536b4ecb, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 5e08cb058921a9443a090b43f9501570, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -1085,7 +1085,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: b0f355847fef08b4183d0a5f536b4ecb, type: 2}
+  m_Texture: {fileID: 8400000, guid: 5e08cb058921a9443a090b43f9501570, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -4248,7 +4248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1157618117}
   - component: {fileID: 1157618118}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: MiniMapIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7053,7 +7053,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 8e9c9252cca0e934887fb20cc4834f96, type: 2}
+  m_Texture: {fileID: 8400000, guid: e5e18bb243b3bc34abde0c2217daa6aa, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -7548,9 +7548,9 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 200
+    m_Bits: 456
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 8e9c9252cca0e934887fb20cc4834f96, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: e5e18bb243b3bc34abde0c2217daa6aa, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
