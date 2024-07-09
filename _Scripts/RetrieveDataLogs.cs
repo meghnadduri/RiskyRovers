@@ -16,17 +16,19 @@ public class RetrieveDataLogs : MonoBehaviour
     private int cvx;
     private int cvy;
     private string direction;
+    List<string> movements = new List<string>();
+    private string movementsPrinted = "";
 
     void Start()
     {
-        previousPosition = transform.position;
-        checkpointPosition = transform.position;
+        previousPosition = rover.transform.position;
+        checkpointPosition = rover.transform.position;
         previousVelocity = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     void Update()
     {
-        Vector3 currentPosition = transform.position;
+        Vector3 currentPosition = rover.transform.position;
         Vector2 displacement = currentPosition - previousPosition;
         
         // Calculate velocity as displacement per second
@@ -78,8 +80,11 @@ public class RetrieveDataLogs : MonoBehaviour
             // Calculate the distance moved since the start
             distanceMoved = Vector3.Distance(checkpointPosition, currentPosition);
 
-            // Print the distance moved to the console
-            Debug.Log("Distance Moved: " + direction + " " + distanceMoved);
+            // Add the distance moved to the "movements" array
+            if (distanceMoved > 0.1) {
+                movements.Add(direction + " " + distanceMoved);
+                Debug.Log(direction + " " + distanceMoved);
+            }
 
             // Reset previousPosition;
             checkpointPosition = currentPosition;
@@ -121,5 +126,12 @@ public class RetrieveDataLogs : MonoBehaviour
         // Update previousVelocity to currentVelocity for the next frame
         previousPosition = currentPosition;
         previousVelocity = currentVelocity;
+    }
+
+    public string printMovements() {
+        foreach (string item in movements) {
+            movementsPrinted += item + "\n";
+        }
+        return movementsPrinted;
     }
 }
