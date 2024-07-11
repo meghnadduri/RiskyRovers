@@ -82,8 +82,7 @@ public class RetrieveDataLogs : MonoBehaviour
 
             // Add the distance moved to the "movements" array
             if (distanceMoved > 0.1) {
-                movements.Add(direction + " " + distanceMoved);
-                Debug.Log(direction + " " + distanceMoved);
+                movements.Add(direction + " " + distanceMoved.ToString($"F{4}") + " m");
             }
 
             // Reset previousPosition;
