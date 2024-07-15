@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameManagerScore : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
 
     public TextMeshProUGUI mainText;
@@ -11,13 +11,11 @@ public class GameManagerScore : MonoBehaviour
    
 
     void Start() {
-        mainText.text = "Rocks Found: " + score + "/6";
+        mainText.text = "Rocks Found: " + score + "/4";
     }
     public void UpdateScore(int s) {
         score += s;
-        mainText.text = "Rocks Found: " + score + "/6";
+        mainText.text = "Rocks Found: " + score + "/4";
     }
-
 }
-
 

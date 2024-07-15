@@ -1,67 +1,51 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class HealthManager : MonoBehaviour
 {
-    public int maxHealth = 100; // Total max health for the combined health bar
-    private float currentHealth;
-    public Slider bigHealthBarSlider; // Reference to the big Health Bar Slider
-
-    public MovHealthManager movementHealthManager; // Reference to the script managing movement health
-    public RockHealthManager collisionHealthManager; // Reference to the script managing collision health
-
-    private float movementHealth;
-    private float collisionHealth;
+    public int maxHealth = 10;
+    private int currentHealth;
+    public Slider healthBarSlider; // Reference to the Health Bar Slider
+    public GameObject gameOverPanel; // Reference to the Game Over Panel
 
     void Start()
     {
         currentHealth = maxHealth;
-        bigHealthBarSlider.maxValue = maxHealth;
-        bigHealthBarSlider.value = currentHealth;
-
-        // Initialize individual health managers
-        movementHealthManager.onHealthChanged += UpdateMovementHealth;
-        collisionHealthManager.onHealthChanged += UpdateCollisionHealth;
+        healthBarSlider.maxValue = maxHealth;
+        healthBarSlider.value = currentHealth;
+        gameOverPanel.SetActive(false); // Make sure the Game Over Panel is hidden at the start
     }
 
-    void UpdateMovementHealth(float newMovementHealth)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        movementHealth = newMovementHealth;
-        UpdateCombinedHealth();
+        if (collision.gameObject.CompareTag("Rock"))
+        {
+            TakeDamage(1);
+        }
     }
 
-    void UpdateCollisionHealth(float newCollisionHealth)
+    void TakeDamage(int damage)
     {
-        collisionHealth = newCollisionHealth;
-        UpdateCombinedHealth();
-    }
-
-    void UpdateCombinedHealth()
-    {
-        // Calculate the combined health
-        currentHealth = movementHealth + collisionHealth;
-
+        currentHealth -= damage;
         if (currentHealth < 0)
         {
             currentHealth = 0;
         }
-
         UpdateHealthBar();
-
-        if (currentHealth <= 0)
+        
+        if (currentHealth == 0)
         {
-            LoadGameOverScene(); // Load the game over scene
+            ShowGameOver();
         }
     }
 
     void UpdateHealthBar()
     {
-        bigHealthBarSlider.value = currentHealth;
+        healthBarSlider.value = currentHealth;
     }
 
-    void LoadGameOverScene()
+    void ShowGameOver()
     {
-        SceneManager.LoadScene("Died"); // Replace "GameOverScene" with the name of your scene
+        gameOverPanel.SetActive(true); // Show the Game Over Panel
     }
 }
