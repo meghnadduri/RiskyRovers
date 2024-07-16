@@ -8,6 +8,8 @@ public class HealthManager : MonoBehaviour
     public Slider healthBarSlider; // Reference to the Health Bar Slider
     public GameObject gameOverPanel; // Reference to the Game Over Panel
     public Button launchSecondRoverButton; // Reference to the Launch Second Rover Button
+    public GameObject gravePrefab; // Reference to the Grave Prefab
+    public Transform roverTransform; // Reference to the Rover's Transform
 
     private bool isGameOver = false;
 
@@ -27,14 +29,6 @@ public class HealthManager : MonoBehaviour
     {
         if (!isGameOver)
         {
-            // Example: Decrease health over time for demonstration purposes
-            // Remove or adjust this part according to your game logic
-            // currentHealth -= Time.deltaTime * 5f;
-            // if (currentHealth <= 0)
-            // {
-            //     currentHealth = 0;
-            //     ShowGameOver();
-            // }
             UpdateHealthBar();
         }
     }
@@ -79,6 +73,12 @@ public class HealthManager : MonoBehaviour
 
     void OnLaunchSecondRover()
     {
+        // Calculate the offset position for the grave
+        Vector3 gravePosition = roverTransform.position + new Vector3(1.0f, 0, 0); // Adjust the offset as needed
+
+        // Instantiate the grave sprite at the calculated position
+        Instantiate(gravePrefab, gravePosition, Quaternion.identity);
+
         currentHealth = maxHealth;
         isGameOver = false;
         UpdateHealthBar();
