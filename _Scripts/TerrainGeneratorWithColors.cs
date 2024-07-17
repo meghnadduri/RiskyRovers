@@ -15,16 +15,17 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
     public Vector3 mapPositionOffset = new Vector3(500f, 500f, 0f);
     public RawImage rawImage; // Reference to the RawImage component to display the map
     public Transform rover; // Rover to track
-    public float rawX; // To reveal mini map
-    public float rawY; // To reveal mini map
-    public int convertedX; // To reveal mini map
-    public int convertedY; // To reveal mini map
-    public bool[,] boolArray = new bool[16, 16]; // Bool array for mini map
-    public float[,] heightMap;
-    public float [,] lowResMap;
+    public float rawX; // X coordinate of rover position
+    public float rawY; // Y coordinate of rover position
+    public int convertedX; // Rover X position as a value in the array
+    public int convertedY; // Rover Y position as a vlue in the array
+    public bool[,] boolArray = new bool[16, 16]; // Stores values of the mini map that have been explored
+    public float[,] heightMap; // The main terrain map
+    public float [,] lowResMap; // The low res layer of the mini map
 
     void Start()
     {
+        // Initialize every value in the bool array as false bc nothing has been explored yet
         for (int i = 0; i < 16; i++) 
         {
             for (int j = 0; j < 16; j++)
@@ -33,6 +34,7 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
             }
         }
 
+        // Generate the appropriate amount of terrains (1 in this case)
         for (int i = 0; i < terrainCount; i++)
         {
             GenerateTerrain(i);
@@ -44,18 +46,20 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
         // Get the world coordinates of the rover
         Vector3 roverWorldPosition = rover.transform.position;
 
-        // Get just the raw X and Y from the vector
+        // Get just the raw X and Y coordinates from the vector
         rawX = (float) roverWorldPosition.x;
         rawY = (float) roverWorldPosition.y;
 
         // Convert it to 16 x 16
+        // The raw coordinates are on a scale from -10 to 10. To get them to a scale of 0 to 15, we have to add 10, multiply by 8, and round down to the nearest int
         convertedX = (int) ((rawX + 10.0f) * 0.8f);
         convertedY = (int) ((rawY + 10.0f) * 0.8f);
 
         // Change the appropriate value in the bool array
-        if (convertedX < 16 && convertedY < 16) {
-            boolArray[convertedX, convertedY] = true;
+        if (convertedX < 16 && convertedY < 16) { // Check to make sure the new coords are within the array bounds
+            boolArray[convertedX, convertedY] = true; // Change rover's location to true
             
+            // If they exist, change the values directly around the rover's location to true
             if (convertedX > 0) {
                 boolArray[convertedX - 1, convertedY] = true;
             }
@@ -82,7 +86,7 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
             }
         }
         
-        // Display the lowResMap visually
+        // Display the lowResMap
         DisplayLowResMap(lowResMap, 1, boolArray);
     }
 
@@ -148,21 +152,21 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
             for (int y = 0; y < lowResMapSize; y++) {
                 float avg = 0.0f;
 
-                // Multiply both coords by lowResMapSize
+                // Find tempXCoord and tempYCoord on the 2049 x 2049 relative to where x and y are on the 16 x 16
                 int tempXCoord = lowResScale * x;
                 int tempYCoord = lowResScale * y;
                
-                // Add up the values
+                // Add up all the values in that area 
                 for (int a = 0; a < lowResScale; a++) {
                     for (int b = 0; b < lowResScale; b++) {
                         avg += heightMap[tempXCoord + a, tempYCoord + b];
                     }
                 }
                
-                // Divide by lowResScale squared
+                // Divide by lowResScale squared to find the average
                 avg = avg / (lowResScale*lowResScale);
 
-                // Assign value to lowResMap
+                // Assign value to its respective index on the lowResMap
                 lowResMap[x,y] = avg;
             }
         }
@@ -170,8 +174,11 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
 
     void DisplayHeightMap(float[,] heightMap, int index)
     {
+        // Create a new texture
         Texture2D texture = new Texture2D(mapSize, mapSize, TextureFormat.RGBA32, false);
-        texture.filterMode = FilterMode.Bilinear; // Smoothing the texture
+        // Smoothing the texture
+        texture.filterMode = FilterMode.Bilinear;
+        // Create a new array for colors
         Color[] colors = new Color[mapSize * mapSize];
 
         for (int y = 0; y < mapSize; y++)
@@ -187,9 +194,13 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
         texture.SetPixels(colors);
         texture.Apply();
 
+        // Create a new sprite and assign the color values (texture) and dimensions (mapSize)
         Sprite sprite = Sprite.Create(texture, new Rect(0, 0, mapSize, mapSize), Vector2.one * 0.5f);
+        // Create a new GameObject and label it
         GameObject terrain = new GameObject("GeneratedTerrain_" + index);
+        // Add a sprite renderer component
         SpriteRenderer renderer = terrain.AddComponent<SpriteRenderer>();
+        // Add the sprite created above as the sprite
         renderer.sprite = sprite;
 
         // Calculate position for the terrain with minimal spacing
@@ -205,8 +216,11 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
 
     void DisplayLowResMap(float[,] lowResMap, int index, bool[,] boolArray)
     {
+        // Create a new texture
         Texture2D texture = new Texture2D(lowResMapSize, lowResMapSize, TextureFormat.RGBA32, false);
-        texture.filterMode = FilterMode.Bilinear; // Smoothing the texture
+        // Smoothing the texture
+        texture.filterMode = FilterMode.Bilinear;
+        // Create new array for the colors
         Color[] colors = new Color[lowResMapSize * lowResMapSize];
 
         for (int y = 0; y < lowResMapSize; y++)
@@ -224,7 +238,8 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
         // Make the color change
         for (int m = 0; m < 16; m++) {
             for (int n = 0; n < 16; n++) {
-                if (boolArray[m,n] == true) {
+                if (boolArray[m,n] == true) { 
+                    // If a value is set to 'true' (has been explored by player), set that unit on the lowResMap to transparent to reveal the high res map below it
                     colors[n * lowResMapSize + m ] = new Color(0.0f, 0.0f, 0.0f, 0.0f);
                 }
             }
@@ -233,9 +248,13 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
         texture.SetPixels(colors);
         texture.Apply();
 
+        // Create a new sprite and assign the color values (texture) and dimensions (lowResMapSize)
         Sprite sprite = Sprite.Create(texture, new Rect(0, 0, lowResMapSize, lowResMapSize), Vector2.one * 0.5f);
+        // Create a new GameObject and label it
         GameObject terrain = new GameObject("GeneratedTerrain_" + index);
+        // Add a sprite renderer component
         SpriteRenderer renderer = terrain.AddComponent<SpriteRenderer>();
+        // Add the sprite created above as the sprite
         renderer.sprite = sprite;
 
         // Calculate position for the terrain with minimal spacing
@@ -251,9 +270,12 @@ public class DiamondSquareTerrainGenerator : MonoBehaviour
         //Apply the position transform
         terrain.transform.position = mapPositionOffset;
 
+        // Assign the low res map to a rawImage in order to make it a UI element
         if (rawImage != null) {
             rawImage.texture = texture;
         }
+
+        // Since we are generating a new low res map every frame, destroy each one to avoid crashing the game
         Destroy(terrain,0.1f);
     }
 }
