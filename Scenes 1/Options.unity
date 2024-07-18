@@ -2873,7 +2873,6 @@ GameObject:
   - component: {fileID: 1386015136}
   - component: {fileID: 1386015139}
   - component: {fileID: 1386015138}
-  - component: {fileID: 1386015137}
   m_Layer: 7
   m_Name: FOVHeading
   m_TagString: Untagged
@@ -2901,18 +2900,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 800, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1386015137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1386015135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48cc156b290741149a4d48340e10e392, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1386015138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3423,7 +3410,6 @@ GameObject:
   - component: {fileID: 1545263088}
   - component: {fileID: 1545263087}
   - component: {fileID: 1545263086}
-  - component: {fileID: 1545263084}
   m_Layer: 7
   m_Name: VolumeHeading
   m_TagString: Untagged
@@ -3431,18 +3417,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1545263084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545263083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48cc156b290741149a4d48340e10e392, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1545263086
 MonoBehaviour:
   m_ObjectHideFlags: 0
