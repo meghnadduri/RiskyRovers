@@ -20,8 +20,8 @@ public class ResetSettingsButtonHandler : MonoBehaviour
         // Set the default FOV to 60
         FOVSlider.value = 0.5f;
 
-        // Set the default volume to 50
-        VolumeSlider.value = 0.5f;
+        // Set the default volume to 100
+        VolumeSlider.value = 1.0f;
         
         // Register the button click event
         myButton.onClick.AddListener(ResetSettings);
@@ -34,7 +34,7 @@ public class ResetSettingsButtonHandler : MonoBehaviour
         // Set the default FOV to 60
         FOVSlider.value = 0.5f;
 
-        // Set the default volume to 50
-        VolumeSlider.value = 0.5f;
+        // Set the default volume to 100
+        VolumeSlider.value = 1.0f;
     }
 }

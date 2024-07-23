@@ -9,11 +9,12 @@ public class RockHelp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManagerScore = GameObject.Find("GameManagerScore").GetComponent<GameManagerScore>();
+        gameManagerScore = GameObject.Find("Score").GetComponent<GameManagerScore>();
         
     }
 
     private void OnMouseDown() {
+        //Debug.Log("clicked?");
         if (stop) {
             return;
         }
