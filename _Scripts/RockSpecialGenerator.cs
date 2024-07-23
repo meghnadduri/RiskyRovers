@@ -9,25 +9,26 @@ public class RockSpecialGenerator : MonoBehaviour
     public float areaWidth = 20f; // Width of the area where rocks can be placed
     public float areaHeight = 20f; // Height of the area where rocks can be placed
     public float minDistanceBetweenRocks = 2f; // Minimum distance between rocks
-    private Vector2 spaceBaseLocation = new Vector2(-0.172f, 0.379f);
-    //private RockGenerator generator;
 
     void Start()
     {
         GenerateRocks();
     }
-    
+    public void changeNumRocks(int n)
+    {
+        numberOfRocks = n;
+        PlayerPrefs.SetInt("numberOfRocks", numberOfRocks);
+    }
 
     void GenerateRocks()
     {
         //numberOfRocks = PlayerPrefs.GetInt("numberOfRocks");
         List<Vector2> rockPositions = new List<Vector2>();
-        rockPositions.Add(spaceBaseLocation);
 
         for (int i = 0; i < numberOfRocks; i++)
         {
             Vector2 newPosition;
-            bool validPosition; // checks if you can place rocks in this spot (doesn't collide with any other special rocks. )
+            bool validPosition;
 
             do
             {
@@ -36,10 +37,10 @@ public class RockSpecialGenerator : MonoBehaviour
                     Random.Range(-areaWidth / 2, areaWidth / 2),
                     Random.Range(-areaHeight / 2, areaHeight / 2)
                 );
-                
-                foreach (Vector2 position in rockPositions) // loops through each rock position that is already used.
+
+                foreach (Vector2 position in rockPositions)
                 {
-                    if (Vector2.Distance(position, newPosition) < minDistanceBetweenRocks) // checks if the minDistance is more or less. 
+                    if (Vector2.Distance(position, newPosition) < minDistanceBetweenRocks)
                     {
                         validPosition = false;
                         break;
@@ -47,10 +48,9 @@ public class RockSpecialGenerator : MonoBehaviour
                 }
             } while (!validPosition);
 
-            rockPositions.Add(newPosition); // makes sure that no other rocks can generate in the same spot. 
-            Instantiate(rockPrefabs[i], newPosition, Quaternion.identity); // same as the rock generator script, however, it only instantiates each one once (rockPrefabs[i]).
+            rockPositions.Add(newPosition);
+            Instantiate(rockPrefabs[i], newPosition, Quaternion.identity);
         }
     }
 }
-
 

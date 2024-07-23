@@ -90,31 +90,31 @@ public class RetrieveDataLogs : MonoBehaviour
 
             // Identify the direction
             if (cvx == 0 && cvy == 1) {
-                direction = "North";
+                direction = "Forward";
             }
             else if (cvx == 0 && cvy == -1) {
-                direction = "South";
+                direction = "Backward";
             }
             else if (cvx == 1 && cvy == 0) {
-                direction = "East";
+                direction = "Right";
             }
             else if (cvx == -1 && cvy == 0) {
-                direction = "West";
+                direction = "Left";
             }
             else if (cvx == 1 && cvy == 1) {
-                direction = "Northeast";
+                direction = "Forward and Right";
             }
             else if (cvx == -1 && cvy == 1) {
-                direction = "Northwest";
+                direction = "Forward and Left";
             }
             else if (cvx == -1 && cvy == -1) {
-                direction = "Southwest";
+                direction = "Backward and Left";
             }
             else if (cvx == 1 && cvy == -1) {
-                direction = "Southeast";
+                direction = "Backward and Right";
             }
             else {
-                direction = "Back to Base";
+                direction = "";
             }
 
         }
