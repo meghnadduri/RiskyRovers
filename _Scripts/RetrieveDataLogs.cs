@@ -114,7 +114,7 @@ public class RetrieveDataLogs : MonoBehaviour
                 direction = "Southeast";
             }
             else {
-                direction = "Back to Base:";
+                direction = "Back to Base";
             }
 
         }

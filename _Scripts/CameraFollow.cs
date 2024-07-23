@@ -11,7 +11,12 @@ public class CameraFollow : MonoBehaviour
     {
         // Set the orthographic size to the FOV value set by the player
         float cameraSize = PlayerPrefs.GetFloat("fovValue");
-        camera.orthographicSize = cameraSize;
+        if (cameraSize > 0) { // Check the cameraSize is a plausible value
+            camera.orthographicSize = cameraSize;
+        }
+        else { 
+            camera.orthographicSize = 0.5f;
+        }
 
         Vector3 desiredPosition = target.position + offset;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
