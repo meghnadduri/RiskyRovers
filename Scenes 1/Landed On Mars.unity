@@ -853,13 +853,10 @@ MonoBehaviour:
     delay: 0
   - uiText: {fileID: 351097419}
     fadeDuration: 5
-    delay: 5
+    delay: 4
   - uiText: {fileID: 1026592916}
     fadeDuration: 5
     delay: 10
-  - uiText: {fileID: 457939867}
-    fadeDuration: 5
-    delay: 15
 --- !u!1 &1234134066
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,6 +867,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1234134068}
   - component: {fileID: 1234134067}
+  - component: {fileID: 1234134069}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -988,6 +986,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1234134069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234134066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34049110c22041a4c91090c2fce7d10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1234134067}
 --- !u!1 &1243849088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,7 +1107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.21960784}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.99215686}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

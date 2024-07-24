@@ -316,10 +316,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.7725491, g: 0.7294118, b: 0.30980393, a: 1}
+    m_HighlightedColor: {r: 0.8301887, g: 0.79988956, b: 0.505162, a: 1}
+    m_PressedColor: {r: 0.9245283, g: 0.9047725, b: 0.7195621, a: 1}
+    m_SelectedColor: {r: 0.92549026, g: 0.9058824, b: 0.7176471, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7735849, g: 0.72827846, b: 0.31016377, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -449,11 +449,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor: {r: 0.40837488, g: 0.6509434, b: 0.40837488, a: 1}
+    m_HighlightedColor: {r: 0.4362763, g: 0.7169812, b: 0.4362763, a: 1}
+    m_PressedColor: {r: 0.77629644, g: 1, b: 0.7122642, a: 1}
+    m_SelectedColor: {r: 0.77647066, g: 1, b: 0.7137255, a: 1}
+    m_DisabledColor: {r: 0.38431376, g: 0.62352943, b: 0.38431376, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38474548, g: 0.6226415, b: 0.38608295, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -532,6 +532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 296008337}
   - component: {fileID: 296008336}
+  - component: {fileID: 296008338}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -650,6 +651,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &296008338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296008335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32a02425f2431cc4caf1c0e140971a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundMusic: {fileID: 8300000, guid: a4bc84596cc66a449b30b29855273530, type: 3}
+  seamlessScenes:
+  - Customize rover 4
+  - main screen 2
+  - Objective Difficulty 1
+  - Options
+  - SampleScene 2
 --- !u!1 &315800363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,10 +1737,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.76470596, g: 0.41176474, b: 0.40000004, a: 1}
+    m_HighlightedColor: {r: 0.8018868, g: 0.53467256, b: 0.5257654, a: 1}
+    m_PressedColor: {r: 0.8396226, g: 0.75882876, b: 0.75645244, a: 1}
+    m_SelectedColor: {r: 0.83921576, g: 0.7607844, b: 0.7568628, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1765,7 +1785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.764151, g: 0.4109024, b: 0.4000979, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
