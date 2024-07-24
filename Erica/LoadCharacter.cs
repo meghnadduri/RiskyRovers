@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class LoadCharacter : MonoBehaviour
+public class LoadCharacter : MonoBehaviour // NOT RELEVANT SCRIPT - NOT CURRENTLY BEING USED IN GAME 
 {
     //public GameObject [] characterPrefabs;
     public Sprite[] characterPrefabs;
